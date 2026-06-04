@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Отчёт агентства — Diskurs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<style>
+:root{--bg:#ffffff;--bg2:#f6f6f4;--bg3:#f0efec;--text:#1a1a18;--text2:#6b6b66;--text3:#a0a09a;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--accent:#3B6D11;--accent-light:#EAF3DE;--accent-mid:#639922;--red:#E24B4A;--red-light:#FCEBEB;--amber:#BA7517;--amber-light:#FAEEDA;--radius:8px;--radius-lg:12px}
+@media(prefers-color-scheme:dark){:root{--bg:#1e1e1c;--bg2:#2a2a27;--bg3:#242422;--text:#f0efe9;--text2:#a0a098;--text3:#6b6b64;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);--accent-light:#1a2e0a;--red-light:#2e1010;--amber-light:#2e1e04}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg3);color:var(--text);min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.rh{display:flex;align-items:center;justify-content:space-between;padding-bottom:1.5rem;border-bottom:0.5px solid var(--border);margin-bottom:2rem;flex-wrap:wrap;gap:12px}
+.rt{font-size:22px;font-weight:600;display:flex;align-items:center;gap:10px}
+.rt-dot{width:10px;height:10px;border-radius:50%;background:var(--accent-mid)}
+.rm{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+select{font-size:14px;padding:7px 12px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg);color:var(--text);cursor:pointer;font-family:inherit}
+.btn{font-size:13px;padding:7px 16px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg);color:var(--text);cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit;transition:background 0.15s}
+.btn:hover{background:var(--bg2)}
+.btn.ok{border-color:var(--accent);color:var(--accent)}
+.btn.err{border-color:var(--red);color:var(--red)}
+.btn.saving{opacity:0.6;pointer-events:none}
+.sync{font-size:12px;color:var(--text2);display:flex;align-items:center;gap:6px}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0}
+.sync-dot.live{background:var(--accent)}
+.sync-dot.err{background:var(--red)}
+.sec{margin-bottom:2rem}
+.sh{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.sh i{font-size:17px;color:var(--text2)}
+.sh span{font-size:16px;font-weight:500}
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.mc{background:var(--bg2);border-radius:var(--radius);padding:14px 16px}
+.ml{font-size:12px;color:var(--text2);margin-bottom:8px;line-height:1.3}
+.mi{font-size:20px;font-weight:500;width:100%;border:none;background:transparent;color:var(--text);outline:none;padding:0;font-family:inherit}
+.mi:focus{border-bottom:1.5px solid var(--accent-mid)}
+.md{font-size:11px;margin-top:5px}
+.dp{color:var(--accent)}.dn{color:var(--red)}.dz{color:var(--text2)}
+.tc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bx{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px}
+.bt{font-size:13px;font-weight:500;margin-bottom:12px;color:var(--text2)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{font-weight:500;font-size:12px;color:var(--text2);text-align:left;padding:6px 10px;border-bottom:0.5px solid var(--border)}
+td{padding:8px 10px;border-bottom:0.5px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+td input{font-size:13px;width:100%;border:none;background:transparent;color:var(--text);outline:none;padding:0;font-family:inherit}
+td input:focus{border-bottom:1px solid var(--accent-mid)}
+.nr{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.nd{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.nl{font-size:13px;flex:1;color:var(--text)}
+.ni{font-size:13px;font-weight:500;width:60px;border:none;background:transparent;color:var(--text);outline:none;text-align:right;font-family:inherit}
+.ni:focus{border-bottom:1px solid var(--accent-mid)}
+.hb{display:flex;gap:4px;margin-top:12px}
+.hs{flex:1;height:6px;border-radius:3px}
+.fl{display:flex;flex-direction:column;gap:8px}
+.fi{display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:var(--radius);font-size:13px}
+.fg{background:var(--accent-light);color:var(--accent)}
+.fw{background:var(--amber-light);color:var(--amber)}
+.fd{background:var(--red-light);color:var(--red)}
+.fn{border:0.5px solid var(--border);color:var(--text2)}
+.fdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.fg .fdot{background:var(--accent)}.fw .fdot{background:var(--amber)}.fd .fdot{background:var(--red)}
+textarea{width:100%;min-height:90px;font-size:13px;border:0.5px solid var(--border);border-radius:var(--radius);padding:10px 12px;background:var(--bg2);color:var(--text);outline:none;resize:vertical;font-family:inherit;line-height:1.6}
+textarea:focus{border-color:var(--accent-mid)}
+.dr{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.dn2{font-size:13px;width:90px;flex-shrink:0;color:var(--text)}
+.dbw{flex:1;background:var(--bg2);border-radius:4px;height:8px;overflow:hidden}
+.db{height:8px;border-radius:4px;transition:width 0.3s;width:0%}
+.dvi{font-size:13px;font-weight:500;width:44px;border:none;background:transparent;color:var(--text);outline:none;text-align:right;padding:0;font-family:inherit}
+.dvi:focus{border-bottom:1px solid var(--accent-mid)}
+.dv{height:0.5px;background:var(--border);margin:1.75rem 0}
+@media(max-width:560px){.tc{grid-template-columns:1fr}.mg{grid-template-columns:repeat(2,1fr)}.rh{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="rh">
+    <div class="rt"><div class="rt-dot"></div>Отчёт агентства</div>
+    <div class="rm">
+      <select id="monthSel"></select>
+      <button class="btn" id="saveBtn" onclick="saveData()"><i class="ti ti-device-floppy"></i> Сохранить</button>
+      <div class="sync"><span class="sync-dot" id="syncDot"></span><span id="syncMsg">подключение...</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><i class="ti ti-trending-up"></i><span>Бизнес</span></div>
+    <div class="mg">
+      <div class="mc"><div class="ml">Выручка</div><input class="mi" id="revenue_cur" type="text" placeholder="—" oninput="updateDelta('revenue')"><div class="md" id="delta_revenue"></div></div>
+      <div class="mc"><div class="ml">Чистая прибыль</div><input class="mi" id="profit_cur" type="text" placeholder="—" oninput="updateDelta('profit')"><div class="md" id="delta_profit"></div></div>
+      <div class="mc"><div class="ml">Рентабельность %</div><input class="mi" id="margin_cur" type="text" placeholder="—" oninput="updateDelta('margin')"><div class="md" id="delta_margin"></div></div>
+      <div class="mc"><div class="ml">Дебиторка</div><input class="mi" id="debtor_cur" type="text" placeholder="—" oninput="updateDelta('debtor');updateFlags()"><div class="md" id="delta_debtor"></div></div>
+    </div>
+  </div>
+  <div class="dv"></div>
+
+  <div class="sec">
+    <div class="sh"><i class="ti ti-users"></i><span>Клиенты</span></div>
+    <div class="tc">
+      <div class="bx"><div class="bt">Показатели</div>
+        <table><thead><tr><th>Показатель</th><th>Значение</th></tr></thead><tbody>
+          <tr><td>Retention %</td><td><input id="retention" type="text" placeholder="—" oninput="updateFlags()"></td></tr>
+          <tr><td>Новых клиентов</td><td><input id="clients_new" type="text" placeholder="—"></td></tr>
+          <tr><td>Ушедших клиентов</td><td><input id="clients_lost" type="text" placeholder="—"></td></tr>
+          <tr><td>Клиентов в риске</td><td><input id="clients_risk" type="text" placeholder="—" oninput="updateFlags()"></td></tr>
+        </tbody></table>
+      </div>
+      <div class="bx"><div class="bt">Топ-3 причины ухода</div>
+        <table><tbody>
+          <tr><td style="color:var(--text2);font-size:12px;width:20px">1</td><td><input id="churn1" type="text" placeholder="причина"></td></tr>
+          <tr><td style="color:var(--text2);font-size:12px">2</td><td><input id="churn2" type="text" placeholder="причина"></td></tr>
+          <tr><td style="color:var(--text2);font-size:12px">3</td><td><input id="churn3" type="text" placeholder="причина"></td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+  <div class="dv"></div>
+
+  <div class="sec">
+    <div class="sh"><i class="ti ti-mood-happy"></i><span>Качество / NPS</span></div>
+    <div class="tc">
+      <div class="bx"><div class="bt">Распределение %</div>
+        <div class="nr"><div class="nd" style="background:#3B6D11"></div><span class="nl">Довольны</span><input class="ni" id="nps_green" type="text" placeholder="—" oninput="updateNpsBar()"></div>
+        <div class="nr"><div class="nd" style="background:#BA7517"></div><span class="nl">Нейтральны</span><input class="ni" id="nps_yellow" type="text" placeholder="—" oninput="updateNpsBar()"></div>
+        <div class="nr"><div class="nd" style="background:#E24B4A"></div><span class="nl">Недовольны</span><input class="ni" id="nps_red" type="text" placeholder="—" oninput="updateNpsBar()"></div>
+        <div class="hb" id="npsBar"><div class="hs" style="background:var(--bg2);flex:1"></div></div>
+      </div>
+      <div class="bx"><div class="bt">Топ-3 причины негатива</div>
+        <table><tbody>
+          <tr><td style="color:var(--text2);font-size:12px;width:20px">1</td><td><input id="neg1" type="text" placeholder="причина"></td></tr>
+          <tr><td style="color:var(--text2);font-size:12px">2</td><td><input id="neg2" type="text" placeholder="причина"></td></tr>
+          <tr><td style="color:var(--text2);font-size:12px">3</td><td><input id="neg3" type="text" placeholder="причина"></td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+  <div class="dv"></div>
+
+  <div class="sec">
+    <div class="sh"><i class="ti ti-user-check"></i><span>Команда</span></div>
+    <div class="mg">
+      <div class="mc"><div class="ml">Сотрудников</div><input class="mi" id="team_total" type="text" placeholder="—"></div>
+      <div class="mc"><div class="ml">Новых</div><input class="mi" id="team_new" type="text" placeholder="—"></div>
+      <div class="mc"><div class="ml">Уволилось</div><input class="mi" id="team_left" type="text" placeholder="—"></div>
+      <div class="mc"><div class="ml">В зоне риска</div><input class="mi" id="team_risk" type="text" placeholder="—" oninput="updateFlags()"></div>
+    </div>
+  </div>
+  <div class="dv"></div>
+
+  <div class="sec">
+    <div class="sh"><i class="ti ti-video"></i><span>Производство</span></div>
+    <div class="tc">
+      <div class="bx"><div class="bt">Объёмы план / факт</div>
+        <table><thead><tr><th>Тип</th><th>План</th><th>Факт</th></tr></thead><tbody>
+          <tr><td>Видео</td><td><input id="vid_plan" type="text" placeholder="—"></td><td><input id="vid_fact" type="text" placeholder="—"></td></tr>
+          <tr><td>Посты</td><td><input id="post_plan" type="text" placeholder="—"></td><td><input id="post_fact" type="text" placeholder="—"></td></tr>
+          <tr><td>Сторис</td><td><input id="stor_plan" type="text" placeholder="—"></td><td><input id="stor_fact" type="text" placeholder="—"></td></tr>
+          <tr><td>Креативы</td><td><input id="creat_plan" type="text" placeholder="—"></td><td><input id="creat_fact" type="text" placeholder="—"></td></tr>
+        </tbody></table>
+      </div>
+      <div class="bx"><div class="bt">Качество производства</div>
+        <table><thead><tr><th>Показатель</th><th>Кол-во</th></tr></thead><tbody>
+          <tr><td>Пересъёмов</td><td><input id="reshoot" type="text" placeholder="—"></td></tr>
+          <tr><td>Серьёзных доработок</td><td><input id="rework" type="text" placeholder="—"></td></tr>
+          <tr><td>Среднее правок</td><td><input id="avg_edits" type="text" placeholder="—"></td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+  <div class="dv"></div>
+
+  <div class="sec">
+    <div class="sh"><i class="ti ti-settings"></i><span>Управление</span></div>
+    <div class="tc">
+      <div class="bx"><div class="bt">Ключевые показатели</div>
+        <table><thead><tr><th>Показатель</th><th>Значение</th></tr></thead><tbody>
+          <tr><td>Проектов в риске</td><td><input id="proj_risk" type="text" placeholder="—" oninput="updateFlags()"></td></tr>
+          <tr><td>Просроченных оплат</td><td><input id="overdue_pay" type="text" placeholder="—"></td></tr>
+        </tbody></table>
+      </div>
+      <div class="bx"><div class="bt">Загрузка отделов %</div><div id="deptBars"></div></div>
+    </div>
+  </div>
+  <div class="dv"></div>
+
+  <div class="sec">
+    <div class="sh"><i class="ti ti-sparkles"></i><span>Что улучшили</span></div>
+    <div class="tc">
+      <div class="bx"><div class="bt">Внедрено за месяц</div><textarea id="improvements" placeholder="— опишите что внедрили..."></textarea></div>
+      <div class="bx"><div class="bt">Результат для бизнеса</div><textarea id="imp_result" placeholder="— что это дало..."></textarea></div>
+    </div>
+  </div>
+  <div class="dv"></div>
+
+  <div class="sec">
+    <div class="sh"><i class="ti ti-flag"></i><span>Красные флаги</span></div>
+    <div class="fl" id="flagsList"></div>
+  </div>
+</div>
+
+<script>
+const GAS_URL='https://script.google.com/macros/s/AKfycbz09ifE2z0RHDANqTvQM-EDyejZB-4T1HEsALMDr9DLIlL0prEa5Zpwo6quXaQYs6aiqQ/exec';
+const MONTHS=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const DEPTS=[{id:'dept_targ',label:'Таргет'},{id:'dept_cont',label:'Контент'},{id:'dept_des',label:'Дизайн'},{id:'dept_prod',label:'Продакшен'},{id:'dept_pm',label:'PM'}];
+const FIELDS=['revenue_cur','profit_cur','margin_cur','debtor_cur','retention','clients_new','clients_lost','clients_risk','churn1','churn2','churn3','nps_green','nps_yellow','nps_red','neg1','neg2','neg3','team_total','team_new','team_left','team_risk','vid_plan','vid_fact','post_plan','post_fact','stor_plan','stor_fact','creat_plan','creat_fact','reshoot','rework','avg_edits','proj_risk','overdue_pay','improvements','imp_result','dept_targ','dept_cont','dept_des','dept_prod','dept_pm','revenue_prev','profit_prev','margin_prev','debtor_prev'];
+
+let curMonth=new Date().getMonth(),curYear=new Date().getFullYear(),isSaving=false;
+
+function getMonthKey(m,y){return y+'_'+String(m).padStart(2,'0')}
+function setSyncStatus(state,msg){
+  document.getElementById('syncDot').className='sync-dot'+(state==='ok'?' live':state==='err'?' err':'');
+  document.getElementById('syncMsg').textContent=msg;
+}
+
+function initMonthSelect(){
+  const sel=document.getElementById('monthSel');
+  const now=new Date();
+  for(let i=0;i<12;i++){
+    const d=new Date(now.getFullYear(),now.getMonth()-i,1);
+    const opt=document.createElement('option');
+    opt.value=getMonthKey(d.getMonth(),d.getFullYear());
+    opt.textContent=MONTHS[d.getMonth()]+' '+d.getFullYear();
+    if(i===0)opt.selected=true;
+    sel.appendChild(opt);
+  }
+  sel.addEventListener('change',function(){
+    const p=sel.value.split('_');
+    curYear=parseInt(p[0]);curMonth=parseInt(p[1]);loadData();
+  });
+}
+
+function buildDeptBars(){
+  const wrap=document.getElementById('deptBars');wrap.innerHTML='';
+  DEPTS.forEach(function(d){
+    const row=document.createElement('div');row.className='dr';
+    row.innerHTML='<span class="dn2">'+d.label+'</span><div class="dbw"><div class="db" id="bar_'+d.id+'"></div></div><input class="dvi" id="'+d.id+'" type="text" placeholder="—" oninput="updateBar(\''+d.id+'\')">';
+    wrap.appendChild(row);
+  });
+}
+
+function updateBar(id){
+  const val=parseInt(document.getElementById(id).value)||0;
+  const bar=document.getElementById('bar_'+id);
+  bar.style.width=Math.min(val,100)+'%';
+  bar.style.background=val>110?'#E24B4A':val>90?'#BA7517':'#639922';
+}
+
+function updateDelta(key){
+  const c=parseFloat((document.getElementById(key+'_cur')||{}).value||'');
+  const p=parseFloat((document.getElementById(key+'_prev')||{}).value||'');
+  const el=document.getElementById('delta_'+key);
+  if(!el)return;
+  if(isNaN(c)||isNaN(p)||p===0){el.textContent='';return;}
+  const diff=((c-p)/Math.abs(p)*100).toFixed(1);
+  const isGood=key==='debtor'?parseFloat(diff)<0:parseFloat(diff)>0;
+  el.className='md '+(parseFloat(diff)===0?'dz':isGood?'dp':'dn');
+  el.textContent=(parseFloat(diff)>0?'+':'')+diff+'% vs прошлый мес.';
+}
+
+function updateNpsBar(){
+  const g=parseFloat(document.getElementById('nps_green').value)||0;
+  const y=parseFloat(document.getElementById('nps_yellow').value)||0;
+  const r=parseFloat(document.getElementById('nps_red').value)||0;
+  const bar=document.getElementById('npsBar');
+  if(!g&&!y&&!r){bar.innerHTML='<div class="hs" style="background:var(--bg2);flex:1"></div>';return;}
+  bar.innerHTML=(g?'<div class="hs" style="background:#3B6D11;flex:'+g+'"></div>':'')+(y?'<div class="hs" style="background:#BA7517;flex:'+y+'"></div>':'')+(r?'<div class="hs" style="background:#E24B4A;flex:'+r+'"></div>':'');
+}
+
+function updateFlags(){
+  const ret=parseFloat(document.getElementById('retention').value)||null;
+  const deb=parseFloat((document.getElementById('debtor_cur').value||'').replace(/[^\d.]/g,''))||null;
+  const cr=parseInt(document.getElementById('clients_risk').value)||null;
+  const tr=parseInt(document.getElementById('team_risk').value)||null;
+  const pr=parseInt(document.getElementById('proj_risk').value)||null;
+  const dv=DEPTS.map(function(d){return parseInt(document.getElementById(d.id)&&document.getElementById(d.id).value)||null;}).filter(function(v){return v!==null;});
+  const maxD=dv.length?Math.max.apply(null,dv):null;
+  const checks=[
+    {ok:ret===null||ret>=80,warn:ret!==null&&ret>=70&&ret<80,danger:ret!==null&&ret<70,txt:ret!==null?'Retention '+ret+'% '+(ret>=80?'— норма':'— риск оттока'):'Retention: не заполнено'},
+    {ok:deb===null||deb<=2000000,warn:deb!==null&&deb>1500000&&deb<=2000000,danger:deb!==null&&deb>2000000,txt:deb!==null?'Дебиторка '+deb.toLocaleString('ru')+' '+(deb<=2000000?'— норма':'— превышен порог 2 млн'):'Дебиторка: не заполнено'},
+    {ok:cr===null||cr<5,warn:cr===5,danger:cr!==null&&cr>5,txt:cr!==null?'Клиентов в риске: '+cr:'Клиенты в риске: не заполнено'},
+    {ok:tr===null||tr<3,warn:tr===3,danger:tr!==null&&tr>3,txt:tr!==null?'Сотрудников в риске: '+tr:'Команда в риске: не заполнено'},
+    {ok:pr===null||pr<=2,warn:pr!==null&&pr===3,danger:pr!==null&&pr>3,txt:pr!==null?'Проектов в риске: '+pr:'Проекты в риске: не заполнено'},
+    {ok:maxD===null||maxD<=100,warn:maxD!==null&&maxD>100&&maxD<=110,danger:maxD!==null&&maxD>110,txt:maxD!==null?'Макс. загрузка отдела: '+maxD+'%':'Загрузка отделов: не заполнено'},
+  ];
+  const list=document.getElementById('flagsList');list.innerHTML='';
+  checks.forEach(function(c){
+    const div=document.createElement('div');
+    const empty=c.txt.includes('не заполнено');
+    if(empty){div.className='fi fn';div.innerHTML='<i class="ti ti-minus" style="font-size:14px"></i> '+c.txt;}
+    else if(c.danger){div.className='fi fd';div.innerHTML='<div class="fdot"></div><i class="ti ti-alert-circle" style="font-size:15px"></i> '+c.txt;}
+    else if(c.warn){div.className='fi fw';div.innerHTML='<div class="fdot"></div><i class="ti ti-alert-triangle" style="font-size:15px"></i> '+c.txt;}
+    else{div.className='fi fg';div.innerHTML='<div class="fdot"></div><i class="ti ti-circle-check" style="font-size:15px"></i> '+c.txt;}
+    list.appendChild(div);
+  });
+}
+
+function collectData(){
+  const d={};
+  FIELDS.forEach(function(id){const el=document.getElementById(id);if(el)d[id]=el.value;});
+  return d;
+}
+
+function applyData(data){
+  if(!data)return;
+  FIELDS.forEach(function(id){const el=document.getElementById(id);if(el&&data[id]!==undefined)el.value=data[id];});
+  ['revenue','profit','margin','debtor'].forEach(updateDelta);
+  DEPTS.forEach(function(d){updateBar(d.id);});
+  updateNpsBar();updateFlags();
+}
+
+/* JSONP — работает и с file:// и с https:// */
+function jsonpFetch(url){
+  return new Promise(function(resolve,reject){
+    const cb='_gascb'+Date.now();
+    const s=document.createElement('script');
+    const t=setTimeout(function(){cleanup();reject(new Error('timeout'));},12000);
+    function cleanup(){clearTimeout(t);delete window[cb];if(s.parentNode)s.parentNode.removeChild(s);}
+    window[cb]=function(data){cleanup();resolve(data);};
+    s.src=url+(url.includes('?')?'&':'?')+'callback='+cb;
+    s.onerror=function(){cleanup();reject(new Error('error'));};
+    document.head.appendChild(s);
+  });
+}
+
+async function saveData(){
+  if(isSaving)return;
+  isSaving=true;
+  const btn=document.getElementById('saveBtn');
+  btn.classList.add('saving');
+  btn.innerHTML='<i class="ti ti-loader"></i> Сохраняю...';
+  setSyncStatus('','сохраняю...');
+  const month=getMonthKey(curMonth,curYear);
+  const data=collectData();
+  /* резерв в localStorage */
+  try{localStorage.setItem('diskurs_'+month,JSON.stringify(data));}catch(e){}
+  try{
+    /* POST через no-cors — данные уходят, ответ непрозрачный */
+    await fetch(GAS_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({month:month,data:data}),headers:{'Content-Type':'text/plain'}});
+    setSyncStatus('ok','сохранено '+new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}));
+    btn.classList.remove('saving');btn.classList.add('ok');
+    btn.innerHTML='<i class="ti ti-check"></i> Сохранено';
+    setTimeout(function(){btn.classList.remove('ok');btn.innerHTML='<i class="ti ti-device-floppy"></i> Сохранить';},2500);
+  }catch(e){
+    setSyncStatus('err','только локально');
+    btn.classList.remove('saving');btn.classList.add('err');
+    btn.innerHTML='<i class="ti ti-x"></i> Ошибка';
+    setTimeout(function(){btn.classList.remove('err');btn.innerHTML='<i class="ti ti-device-floppy"></i> Сохранить';},3000);
+  }
+  isSaving=false;
+}
+
+async function loadData(){
+  setSyncStatus('','загружаю...');
+  FIELDS.forEach(function(id){const el=document.getElementById(id);if(el)el.value='';});
+  updateFlags();updateNpsBar();
+  const month=getMonthKey(curMonth,curYear);
+  try{
+    const json=await jsonpFetch(GAS_URL+'?month='+encodeURIComponent(month));
+    if(json&&json.ok&&json.data){
+      applyData(json.data);
+      setSyncStatus('ok','загружено из Google Sheets');
+      return;
+    }
+    setSyncStatus('ok','новый месяц — данных нет');
+  }catch(e){
+    /* резерв localStorage */
+    try{
+      const raw=localStorage.getItem('diskurs_'+month);
+      if(raw){applyData(JSON.parse(raw));setSyncStatus('ok','загружено локально');return;}
+    }catch(le){}
+    setSyncStatus('err','нет связи с Sheets');
+  }
+}
+
+initMonthSelect();buildDeptBars();loadData();
+</script>
+</body>
+</html>
